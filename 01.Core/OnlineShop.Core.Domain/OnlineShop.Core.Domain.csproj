@@ -7,8 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Entities\" />
-    <Folder Include="Products\Entities\" />
+    <Compile Remove="Features\**" />
+    <Compile Remove="Products\**" />
+    <EmbeddedResource Remove="Features\**" />
+    <EmbeddedResource Remove="Products\**" />
+    <None Remove="Features\**" />
+    <None Remove="Products\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\00.FrameWork\Framework.Domain\Framework.Domain.csproj" />
   </ItemGroup>
 
 </Project>
