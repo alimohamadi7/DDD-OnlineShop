@@ -1,10 +1,6 @@
 ﻿using Framework.Domain.Entities;
 using OnlineShop.Core.Domain.Parameters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace OnlineShop.Core.Domain.Catalog.Categories;
 
@@ -24,4 +20,4 @@ public class Feature: Entity<long>
 
     private Feature() { }
 }
-}
+
