@@ -1,7 +1,7 @@
 ﻿using Framework.Domain.ValueObjects;
 
 
-namespace OnlineShop.Core.Domain.Parameters;
+namespace OnlineShop.Core.Domain.Products.Prarmeters;
 
 public record class ProductFeatureValueData
 {

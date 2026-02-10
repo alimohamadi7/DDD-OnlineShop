@@ -1,5 +1,7 @@
 ﻿using Framework.Domain.Entities;
-using OnlineShop.Core.Domain.Parameters;
+using OnlineShop.Core.Domain.Catalog.Parameters;
+using OnlineShop.Core.Domain.Features;
+using OnlineShop.Core.Domain.Features.Prarmeters;
 
 
 namespace OnlineShop.Core.Domain.Catalog.Categories;

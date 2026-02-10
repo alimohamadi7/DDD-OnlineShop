@@ -1,36 +1,24 @@
 ﻿using Framework.Domain.Entities;
 using Framework.Domain.Exceptions;
-using OnlineShop.Core.Domain.Parameters;
+using OnlineShop.Core.Domain.Products.Prarmeters;
+using OnlineShop.Core.Domain.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static OnlineShop.Core.Domain.Products.Product;
+
 
 namespace OnlineShop.Core.Domain.Products;
 
-public class Product
-{
-    public string Title { get; private set; }
-    public string Description { get; private set; }
-    public string Code { get; private set; }
-    public double Price { get; private set; }
-    //private readonly List<ProductFeatureValue> _productFeatureValues = new List<ProductFeatureValue>();
-    //public IReadOnlyList<ProductFeatureValue> ProductFeatureValues => _productFeatureValues;
-    public class Product : AggregateRoot<ProductId>
+    public class Product : AggregateRoot<Guid>
     {
         public string Title { get; private set; }
         public string Description { get; private set; }
         public string Code { get; private set; }
         public double Price { get; private set; }
-        private readonly List<ProductFeatureValue> _productFeatureValues = new List<ProductFeatureValue>();
-        public IReadOnlyList<ProductFeatureValue> ProductFeatureValues => _productFeatureValues;
-
-        internal static Product CreateNew(string title, string description, string code, double price, List<ProductFeatureValueData> productFeatures)
-        {
-            return new Product(title, description, code, price, productFeatures);
-        }
+        //private readonly List<ProductFeatureValue> _productFeatureValues = new List<ProductFeatureValue>();
+        //public IReadOnlyList<ProductFeatureValue> ProductFeatureValues => _productFeatureValues;
 
         private void BuildFeatures(List<ProductFeatureValueData> featureData)
         {
@@ -41,9 +29,9 @@ public class Product
             });
         }
 
-        private Product(string title, string description, string code, double price, List<ProductFeatureValueData> productFeatures)
+        public Product(string title, string description, string code, double price, List<ProductFeatureValueData> productFeatures)
         {
-            if (price < 0) throw new DomainStateException("invalid price value",nameof(price));
+            if (price < 0) throw new InvalidEntityStateException(MessagePatterns.PriceValidationMessage, nameof(price));
             Title = title;
             Code = code;
             Description = description;
