@@ -3,14 +3,16 @@
 
 namespace OnlineShop.Core.Domain.Products.Prarmeters;
 
-public record class ProductFeatureValueData
+public sealed record class ProductFeatureValueParameter
 {
     public BusinessId FeatureId { get; init; }
+    public BusinessId ProductId { get; init; }
     public string Value { get; init; }
 
-    public ProductFeatureValueData(BusinessId featureId, string value)
+    public ProductFeatureValueParameter(BusinessId featureId, BusinessId productId,string value)
     {
         Value = value;
         FeatureId = featureId;
+        ProductId= productId;
     }
 }

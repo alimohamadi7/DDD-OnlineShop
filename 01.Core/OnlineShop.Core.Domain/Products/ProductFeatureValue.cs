@@ -1,12 +1,26 @@
 ﻿using Framework.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Framework.Domain.ValueObjects;
+using OnlineShop.Core.Domain.Features;
+using OnlineShop.Core.Domain.Products.Prarmeters;
+
 
 namespace OnlineShop.Core.Domain.Products;
 
-public class ProductFeatureValue: Entity<Guid>
+public class ProductFeatureValue: Entity<long>
 {
+    public BusinessId ProductId { get; private set; }
+    public BusinessId FeatureId { get; private set; }
+    public string Value { get; private set; }
+
+    public ProductFeatureValue(ProductFeatureValueParameter productFeatureValue)
+    {
+        ProductId = productFeatureValue. ProductId;
+        FeatureId = productFeatureValue.FeatureId;
+        Value = productFeatureValue.Value;
+    }
+
+    private ProductFeatureValue()
+    {
+
+    }
 }
