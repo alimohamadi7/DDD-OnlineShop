@@ -11,8 +11,8 @@ public class Category:AggregateRoot<long>
     public string CategoryName { get; private set; }
     public bool IsActive { get; private set; }
     public string Description { get; private set; }
-    public IReadOnlyList<Feature> Features => _feature.AsReadOnly();
-    private readonly List<Feature> _feature = new List<Feature>();
+    public IReadOnlyList<CategoryFeature> CategoryFeatures => _categoryFeatures.AsReadOnly();
+    private readonly List<CategoryFeature> _categoryFeatures = new List<CategoryFeature>();
     public Category(CategoryCreateParameter parameter, List<FeatureCreateParameter> featureParmeters)
     {
         //validation....
@@ -20,12 +20,12 @@ public class Category:AggregateRoot<long>
         IsActive = parameter. isActive;
         Description = parameter. desscription;
     }
-    private void BuildFeatures(List<FeatureCreateParameter> featureParmeters)
+    private void BuildFeatures(List<Feature> featureParmeters)
     {
         featureParmeters.ForEach(item =>
         {
-            var newFeature = new Feature(new FeatureCreateParameter(item.Title, item.Description, item.SortOrder));
-            _feature.Add(newFeature);
+            var newFeature = new CategoryFeature(BusinessId,item.BusinessId);
+            _categoryFeatures.Add(newFeature);
         });
     }
     private Category()
