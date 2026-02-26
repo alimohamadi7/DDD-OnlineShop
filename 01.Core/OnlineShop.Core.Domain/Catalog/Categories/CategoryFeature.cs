@@ -4,7 +4,7 @@ using Framework.Domain.ValueObjects;
 
 namespace OnlineShop.Core.Domain.Catalog.Categories;
 
-public class CategoryFeature: Entity<long>
+public class CategoryFeature
 {
     public BusinessId CategoryId { get; private set; }
     public BusinessId FeatureId { get; private set; }

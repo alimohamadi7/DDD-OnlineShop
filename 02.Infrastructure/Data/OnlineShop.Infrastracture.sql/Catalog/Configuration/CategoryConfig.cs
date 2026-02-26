@@ -9,27 +9,20 @@ namespace OnlineShop.Infrastracture.sql.Catalog.Configuration
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             builder.ToTable("Categories", "Catalog");
-
+            builder.Property(c => c.BusinessId).IsRequired();
+            builder.HasIndex(c => c.BusinessId).IsUnique();
             builder.HasKey(x => x.Id);
             builder.Property(e => e.CategoryName)
             .HasMaxLength(128).IsRequired();
-
+             
             builder.Property(e => e.Description).HasMaxLength(1024);
-
-            builder.HasMany(c => c.CategoryFeatures)
-                 .WithOne()              // CategoryFeature فقط FK به Category دارد
-                 .HasForeignKey(cf => cf.CategoryId)
-                 .OnDelete(DeleteBehavior.Cascade);
-
             builder.OwnsMany(c => c.CategoryFeatures, cf =>
             {
-                cf.ToTable("CategoryFeatures", "Catalog");
-
-                // PK ترکیبی: CategoryId + FeatureId
-                cf.HasKey(x => new { x.CategoryId, x.FeatureId });
+                cf.WithOwner().HasForeignKey("CategoryId");  // FK به Category
+                cf.Property(x => x.FeatureId);               // ستون FeatureId
+                cf.HasKey("CategoryId", "FeatureId");       // PK ترکیبی
+                cf.ToTable("CategoryFeatures", "Catalog"); // نام جدول
             });
-
-        });
         }
     }
 }
